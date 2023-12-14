@@ -118,6 +118,36 @@
 // });
 
 
+// Database Paths
+var dataFloatPath = 'test/float';
+var dataIntPath = 'test/int';
+
+// Get a database reference 
+const databaseFloat = database.ref(dataFloatPath);
+const databaseInt = database.ref(dataIntPath);
+
+// Variables to save database current values
+var floatReading;
+var intReading;
+
+// Attach an asynchronous callback to read the data
+databaseFloat.on('value', (snapshot) => {
+  floatReading = snapshot.val();
+  console.log(floatReading);
+  document.getElementById("baterai").innerHTML = floatReading;
+}, (errorObject) => {
+  console.log('The read failed: ' + errorObject.name);
+});
+
+databaseInt.on('value', (snapshot) => {
+  intReading = snapshot.val();
+  console.log(intReading);
+  document.getElementById("reading-int").innerHTML = intReading;
+}, (errorObject) => {
+  console.log('The read failed: ' + errorObject.name);
+});
+
+
 const canvas = document.getElementById("myChart");
 canvas.height = 75;
 
@@ -153,7 +183,13 @@ function addData(chart, label, data) {
 
 // randomly add new data
 setInterval(function () {
+  // const newLabel = (Math.random() + 1).toString(36).substring(7);
+  // // const newData = Math.floor(Math.random() * (10 - 1 + 1)) + 1;
   const newLabel = (Math.random() + 1).toString(36).substring(7);
-  const newData = Math.floor(Math.random() * (10 - 1 + 1)) + 1;
+  const newData = floatReading;
   addData(myChart, newLabel, newData);
 }, 1000);
+
+// Complete Project Details at: https://RandomNerdTutorials.com/
+
+

@@ -12,11 +12,13 @@ const databaseInt = database.ref(dataIntPath);
 var floatReading;
 var intReading;
 
+// var pengubah_baterai = document.getElementById("baterai")
+
 // Attach an asynchronous callback to read the data
 databaseFloat.on('value', (snapshot) => {
   floatReading = snapshot.val();
   console.log(floatReading);
-  document.getElementById("reading-float").innerHTML = floatReading;
+  document.getElementById("baterai").innerHTML = floatReading;
 }, (errorObject) => {
   console.log('The read failed: ' + errorObject.name);
 });
